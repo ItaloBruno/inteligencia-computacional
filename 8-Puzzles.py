@@ -17,9 +17,9 @@ class EightPuzzle:
 
     def __init__(self):
         # valor heuristico
-        self._hval = 0
+        self._heuristc_value = 0
         # valor que procura profundidade de cada instancia
-        self._depth = 0
+        self._search_depth = 0
         # no parente em cada caminho
         self._parent = None
         self.adj_matrix = []
@@ -68,7 +68,7 @@ class EightPuzzle:
         def swap_and_clone(a, b):
             p = self._clone ()
             p.swap (a, b)
-            p._depth = self._depth + 1
+            p._search_depth = self._search_depth + 1
             p._parent = self
             return p
 
@@ -103,28 +103,28 @@ class EightPuzzle:
                 # Verifica se o no atual ja foi visto
                 idx_open = index (move, openl)
                 idx_closed = index (move, closedl)
-                hval = h (move)
-                fval = hval + move._depth
+                heuristc_value = h (move)
+                final_value = heuristc_value + move._search_depth
 
                 if idx_closed == -1 and idx_open == -1:
-                    move._hval = hval
+                    move._heuristc_value = heuristc_value
                     openl.append (move)
                 elif idx_open > -1:
                     copy = openl[idx_open]
-                    if fval < copy._hval + copy._depth:
+                    if final_value < copy._heuristc_value + copy._search_depth:
                         # copia valor dos movimentos ja realizados
-                        copy._hval = hval
+                        copy._heuristc_value = heuristc_value
                         copy._parent = move._parent
-                        copy._depth = move._depth
+                        copy._search_depth = move._search_depth
                 elif idx_closed > -1:
                     copy = closedl[idx_closed]
-                    if fval < copy._hval + copy._depth:
-                        move._hval = hval
+                    if final_value < copy._heuristc_value + copy._search_depth:
+                        move._heuristc_value = heuristc_value
                         closedl.remove (copy)
                         openl.append (move)
 
             closedl.append (x)
-            openl = sorted (openl, key=lambda p: p._hval + p._depth)
+            openl = sorted (openl, key=lambda p: p._heuristc_value + p._search_depth)
 
         return [], 0
 

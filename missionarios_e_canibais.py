@@ -32,78 +32,83 @@ class Estado():
 def buscar_solucao(estado_atual):
     solucoes = []
     if estado_atual.barco == 'esquerda':
-        novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq - 2, 'direita ',
-                                  estado_atual.canibalDir, estado_atual.missionarioDir + 2)
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Dois missionarios da esquerda para a direita."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq - 2, estado_atual.missionarioEsq, 'direita ',
-                                  estado_atual.canibalDir + 2, estado_atual.missionarioDir)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Dois canibais da esquerda para a direita."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq - 1, estado_atual.missionarioEsq - 1, 'direita ',
-                                  estado_atual.canibalDir + 1, estado_atual.missionarioDir + 1)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um missionario e um canibal da esquerda para a direita."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq - 1, 'direita ',
-                                  estado_atual.canibalDir, estado_atual.missionarioDir + 1)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um missionario da esquerda para a direita."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq - 1, estado_atual.missionarioEsq, 'direita ',
-                                  estado_atual.canibalDir + 1, estado_atual.missionarioDir)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um canibal da esquerda para a direita."
-            solucoes.append(novo_estado)
+        solucoes_esquerda(estado_atual, solucoes)
     else:
-        novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq + 2, 'esquerda',
-                                  estado_atual.canibalDir, estado_atual.missionarioDir - 2)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um canibal da direita  para a esquerda."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq + 2, estado_atual.missionarioEsq, 'esquerda',
-                                  estado_atual.canibalDir - 2, estado_atual.missionarioDir)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Dois canibais da direita  para a esquerda."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq + 1, estado_atual.missionarioEsq + 1, 'esquerda',
-                                  estado_atual.canibalDir - 1, estado_atual.missionarioDir - 1)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um missionario e um canibal da direita  para a esquerda."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq + 1, 'esquerda',
-                                  estado_atual.canibalDir, estado_atual.missionarioDir - 1)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um missionario da direita  para a esquerda."
-            solucoes.append(novo_estado)
-        novo_estado = Estado(estado_atual.canibalEsq + 1, estado_atual.missionarioEsq, 'esquerda',
-                                  estado_atual.canibalDir - 1, estado_atual.missionarioDir)
-
-        if novo_estado.estado_e_valido():
-            novo_estado.solucoes = estado_atual
-            novo_estado.log = "Um canibal da direita  para a esquerda."
-            solucoes.append(novo_estado)
-
+        solucoes_direita(estado_atual,solucoes)
     return solucoes
+
+def solucoes_esquerda(estado_atual, solucoes):
+    novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq - 2, 'direita ',
+                                estado_atual.canibalDir, estado_atual.missionarioDir + 2)
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Dois missionarios da esquerda para a direita."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq - 2, estado_atual.missionarioEsq, 'direita ',
+                                estado_atual.canibalDir + 2, estado_atual.missionarioDir)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Dois canibais da esquerda para a direita."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq - 1, estado_atual.missionarioEsq - 1, 'direita ',
+                                estado_atual.canibalDir + 1, estado_atual.missionarioDir + 1)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um missionario e um canibal da esquerda para a direita."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq - 1, 'direita ',
+                                estado_atual.canibalDir, estado_atual.missionarioDir + 1)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um missionario da esquerda para a direita."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq - 1, estado_atual.missionarioEsq, 'direita ',
+                                estado_atual.canibalDir + 1, estado_atual.missionarioDir)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um canibal da esquerda para a direita."
+        solucoes.append(novo_estado)
+
+def solucoes_direita(estado_atual,solucoes):
+    novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq + 2, 'esquerda',
+                                estado_atual.canibalDir, estado_atual.missionarioDir - 2)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um canibal da direita  para a esquerda."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq + 2, estado_atual.missionarioEsq, 'esquerda',
+                                estado_atual.canibalDir - 2, estado_atual.missionarioDir)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Dois canibais da direita  para a esquerda."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq + 1, estado_atual.missionarioEsq + 1, 'esquerda',
+                                estado_atual.canibalDir - 1, estado_atual.missionarioDir - 1)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um missionario e um canibal da direita  para a esquerda."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq, estado_atual.missionarioEsq + 1, 'esquerda',
+                                estado_atual.canibalDir, estado_atual.missionarioDir - 1)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um missionario da direita  para a esquerda."
+        solucoes.append(novo_estado)
+    novo_estado = Estado(estado_atual.canibalEsq + 1, estado_atual.missionarioEsq, 'esquerda',
+                                estado_atual.canibalDir - 1, estado_atual.missionarioDir)
+
+    if novo_estado.estado_e_valido():
+        novo_estado.solucoes = estado_atual
+        novo_estado.log = "Um canibal da direita  para a esquerda."
+        solucoes.append(novo_estado)
 
 def busca_em_largura(estado = Estado(3,3,'esquerda',0,0)):
     estado.log = "Estado Inicial."
