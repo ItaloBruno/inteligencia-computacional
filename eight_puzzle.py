@@ -47,7 +47,6 @@ class EightPuzzle:
         row, col = self.find (0)
         free = []
 
-        # encontra posicoes que podem ser movidas
         if row > 0:
             free.append ((row - 1, col))
         if col > 0:
@@ -98,7 +97,6 @@ class EightPuzzle:
             succ = x._generate_moves ()
             idx_open = idx_closed = -1
             for move in succ:
-                # Verifica se o no atual ja foi visto
                 idx_open = index (move, openl)
                 idx_closed = index (move, closedl)
                 heuristc_value = h (move)
@@ -110,7 +108,6 @@ class EightPuzzle:
                 elif idx_open > -1:
                     copy = openl[idx_open]
                     if final_value < copy._heuristc_value + copy._search_depth:
-                        # copia valor dos movimentos ja realizados
                         copy._heuristc_value = heuristc_value
                         copy._parent = move._parent
                         copy._search_depth = move._search_depth
